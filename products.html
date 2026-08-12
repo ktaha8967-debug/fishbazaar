@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="referrer" content="no-referrer">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products | Fish Bazar - Online Fish Market BD</title>
+  <meta name="description" content="Browse our complete list of premium fresh water fish, sea fish, dried shutki, and curry-cut duck/chicken. Best prices with door step delivery.">
+  <link rel="icon" href="https://cdnnew.selfeb.com/images/view/selfeb-fish-bazar-logo-1751863237136.jpg">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="index.css">
+  
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-announcement">
+    🚀 Free delivery on orders above ৳1500! Sourced fresh daily. Order Now: 01794199917
+  </div>
+
+  <!-- Header Wrapper (Desktop) -->
+  <div class="header-wrapper">
+    <div class="container">
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="index.html" class="logo-section">
+          <img src="https://cdnnew.selfeb.com/images/view/images_fish_bazar_logo[1]_1746275734505.jpeg" alt="Fish Bazar Logo">
+        </a>
+
+        <!-- Search Bar -->
+        <div class="search-bar-container">
+          <form class="search-form">
+            <input type="text" placeholder="Search for fresh freshwater fish, ocean seafood, meat..." class="search-input">
+            <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <a href="tel:01794199917" class="action-btn">
+            <i class="fa fa-phone-alt" style="color: var(--primary); font-size: 20px;"></i>
+            <div>
+              <p style="font-size: 11px; color: var(--text-muted);">Hotline</p>
+              <p style="font-size: 14px; font-weight: bold;">01794199917</p>
+            </div>
+          </a>
+          <button class="action-btn" onclick="openCartDrawer()">
+            <i class="fa fa-shopping-basket" style="font-size: 22px;"></i>
+            <span class="cart-count-badge">0</span>
+            <span>Cart</span>
+          </button>
+        </div>
+      </header>
+    </div>
+
+    <!-- Navigation Menu Row -->
+    <nav class="navbar-row">
+      <div class="container">
+        <div class="navbar-nav">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html" class="active">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <div class="nav-auth-section">
+            <a href="#"><i class="fa fa-user"></i> Login</a>
+            <span>/</span>
+            <a href="#">Register</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile Header -->
+  <div class="mobile-header">
+    <div class="mobile-header-top">
+      <a href="index.html" class="mobile-logo">
+        <img src="https://cdnnew.selfeb.com/images/view/images_fish_bazar_logo[1]_1746275734505.jpeg" alt="Fish Bazar Logo">
+      </a>
+      <div style="display: flex; gap: 15px; font-size: 20px;">
+        <a href="tel:01794199917"><i class="fa fa-phone"></i></a>
+        <button onclick="openCartDrawer()" style="color:white; position:relative;">
+          <i class="fa fa-shopping-cart"></i>
+          <span class="cart-count-badge" style="background-color: var(--accent); color: var(--text-main);">0</span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-search-bar">
+      <form id="mobileSearchForm" class="search-form">
+        <input type="text" placeholder="Search Products..." class="search-input" style="padding: 8px 15px;">
+        <button type="submit" class="search-btn" style="padding: 0 15px;"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Shop Section -->
+  <main class="container" style="padding-top: 20px;">
+    <!-- Breadcrumb -->
+    <div style="font-size: 14px; margin-bottom: 20px; color: var(--text-muted);">
+      <a href="index.html" style="color: var(--primary);">Home</a> / <span>Products</span>
+    </div>
+
+    <!-- Filter Layout -->
+    <div class="filter-layout">
+      <!-- Sidebar Filters (Desktop) -->
+      <aside class="sidebar-filters">
+        <div class="filter-section">
+          <h3 class="filter-title">Price Range</h3>
+          <div class="price-range-box">
+            <input type="range" min="100" max="5000" value="5000" class="price-slider" id="priceSlider">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+              <span>Min: ৳100</span>
+              <span id="priceDisplay" style="color: var(--primary-dark);">৳5000</span>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="clearFilters()" class="checkout-btn" style="background-color: #ef5350; font-size: 14px; margin-top: 10px;">Clear Filters</button>
+      </aside>
+
+      <!-- Products Grid Column -->
+      <div>
+        <!-- Categories horizontal list on top -->
+        <div class="categories-grid" id="categoriesContainer" style="margin-bottom: 25px;">
+          <!-- Loaded dynamically -->
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="productsGrid">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Floating Mobile Cart Popup -->
+  <div class="floating-popup-cart" id="popupCart" onclick="openCartDrawer()" style="display: none;">
+    🛒 0 Items - ৳0
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="footer-container">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1 -->
+        <div class="footer-col">
+          <img src="https://cdnnew.selfeb.com/images/view/images_fish_bazar_logo[1]_1746275734505.jpeg" alt="Logo" style="max-height: 60px; margin-bottom: 15px; filter: brightness(0) invert(1);">
+          <p>Fish Bazar is the leading online retail supplier of premium quality river fish, sea fish, and organic meat in Bangladesh.</p>
+          <div class="social-links">
+            <a href="#" class="social-icon flex-center"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon flex-center"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon flex-center"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <!-- Col 2 -->
+        <div class="footer-col">
+          <h3>Quick Pages</h3>
+          <ul class="footer-links">
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="policy.html">Privacy Policy</a></li>
+            <li><a href="policy.html">Refund Policy</a></li>
+          </ul>
+        </div>
+        <!-- Col 3 -->
+        <div class="footer-col">
+          <h3>Customer Care</h3>
+          <p>📧 nazmul.fishbazar@gmail.com</p>
+          <p>📞 01794199917</p>
+          <p>📍 338/13, Khilgaon Block C, Dhaka-1219</p>
+          <p>📍 39 Rupsha Stand Road, Khulna - 9100</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Fish Bazar © 2026 | Powered by <a href="https://selfeb.com/" target="_blank">Selfeb</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky Mobile Navigation Bar -->
+  <div class="mobile-nav-bar">
+    <a href="index.html" class="mobile-nav-item">
+      <i class="fa fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="products.html" class="mobile-nav-item active">
+      <i class="fa fa-fish"></i>
+      <span>Products</span>
+    </a>
+    <a href="javascript:void(0)" class="mobile-nav-item" onclick="openCartDrawer()">
+      <i class="fa fa-shopping-basket"></i>
+      <span>Cart</span>
+    </a>
+    <a href="contact.html" class="mobile-nav-item">
+      <i class="fa fa-map-marker-alt"></i>
+      <span>Contact</span>
+    </a>
+  </div>
+
+  <!-- Cart Sidebar Drawer -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="closeCartDrawer()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <span class="cart-drawer-title">Shopping Cart</span>
+      <button class="cart-close-btn" onclick="closeCartDrawer()">&times;</button>
+    </div>
+    <div class="cart-items-container" id="cartItemsContainer">
+      <!-- Dynamic list -->
+    </div>
+    <div class="cart-drawer-footer">
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotalText">৳0</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Delivery Charge</span>
+        <span id="cartDeliveryChargeText">৳80</span>
+      </div>
+      <div class="cart-summary-row cart-summary-total">
+        <span>Total</span>
+        <span id="cartTotalText">৳0</span>
+      </div>
+      <button class="checkout-btn" onclick="openCheckoutModal()">Place Quick Order</button>
+    </div>
+  </div>
+
+  <!-- Checkout Modal Overlay -->
+  <div class="modal-overlay" id="checkoutModalOverlay">
+    <div class="checkout-modal">
+      <button class="modal-close-btn" onclick="closeCheckoutModal()">&times;</button>
+      <h3 class="modal-title">📦 Complete Quick Order</h3>
+      <form id="checkoutForm">
+        <div class="form-group">
+          <label class="form-label" for="customerName">Your Name *</label>
+          <input type="text" id="customerName" class="form-control" placeholder="Enter Full Name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="customerPhone">Mobile Number *</label>
+          <input type="tel" id="customerPhone" class="form-control" placeholder="01XXXXXXXXX" pattern="[0-9]{11}" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="customerAddress">Delivery Address *</label>
+          <textarea id="customerAddress" class="form-control" rows="3" placeholder="Enter full home address, area, city" required></textarea>
+        </div>
+        
+        <label class="form-label">Payment Method *</label>
+        <div class="payment-options">
+          <div class="payment-card active">COD (Cash on Delivery)</div>
+          <div class="payment-card">bKash</div>
+          <div class="payment-card">Nagad</div>
+        </div>
+
+        <div class="order-summary-box">
+          <div class="cart-summary-row">
+            <span>Subtotal:</span>
+            <span id="summarySubtotal">৳0</span>
+          </div>
+          <div class="cart-summary-row">
+            <span>Delivery:</span>
+            <span id="summaryDelivery">৳80</span>
+          </div>
+          <div class="cart-summary-row" style="font-weight: bold;">
+            <span>Grand Total:</span>
+            <span id="summaryTotal">৳0</span>
+          </div>
+        </div>
+
+        <button type="submit" class="checkout-btn" style="border: none;">Confirm Order ৳</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Global App JS -->
+  <script src="data.js"></script>
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Fish Bazar Management</title>
+  <link rel="icon" href="https://cdnnew.selfeb.com/images/view/selfeb-fish-bazar-logo-1751863237136.jpg">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="admin.css">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Admin Login Screen -->
+  <div id="adminLoginScreen" class="admin-login-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <img src="https://cdnnew.selfeb.com/images/view/images_fish_bazar_logo[1]_1746275734505.jpeg" alt="Logo">
+        <h2>Admin Portal</h2>
+        <p>Sign in to manage your e-commerce operations</p>
+      </div>
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label class="form-label" for="adminUsername">Username</label>
+          <input type="text" id="adminUsername" class="form-control" placeholder="Enter admin username" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="adminPassword">Password</label>
+          <input type="password" id="adminPassword" class="form-control" placeholder="Enter password" required>
+        </div>
+        <div id="loginErrorMessage" class="error-text" style="display: none; margin-bottom: 15px;"></div>
+        <button type="submit" class="checkout-btn" style="border: none; width: 100%;">Access Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Main Dashboard App -->
+  <div id="adminDashboardApp" style="display: none;">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <img src="https://cdnnew.selfeb.com/images/view/images_fish_bazar_logo[1]_1746275734505.jpeg" alt="Logo" style="filter: brightness(0) invert(1);">
+        <span>Admin Panel</span>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="#" class="menu-item active" data-tab="stats">
+          <i class="fa fa-chart-line"></i> Analytics & Overview
+        </a>
+        <a href="#" class="menu-item" data-tab="orders">
+          <i class="fa fa-shopping-bag"></i> Manage Orders
+        </a>
+        <a href="#" class="menu-item" data-tab="products">
+          <i class="fa fa-fish"></i> Manage Products
+        </a>
+        <a href="index.html" class="menu-item">
+          <i class="fa fa-external-link-alt"></i> View Shop Front
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button onclick="adminLogout()" class="logout-btn">
+          <i class="fa fa-sign-out-alt"></i> Log Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-content">
+      <!-- Top navbar -->
+      <header class="admin-topbar">
+        <h2>Dashboard</h2>
+        <div class="admin-profile">
+          <span>Logged in as: <strong id="adminUserDisplay">Admin</strong></span>
+        </div>
+      </header>
+
+      <!-- Analytics Tab -->
+      <section id="tab-stats" class="tab-content active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon bg-primary-light">
+              <i class="fa fa-shopping-basket text-primary-dark"></i>
+            </div>
+            <div class="stat-info">
+              <h3>Total Orders</h3>
+              <p id="statTotalOrders">0</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-success-light">
+              <i class="fa fa-hand-holding-usd text-success-dark"></i>
+            </div>
+            <div class="stat-info">
+              <h3>Total Revenue</h3>
+              <p id="statTotalRevenue">৳0</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-info-light">
+              <i class="fa fa-chart-pie text-info-dark"></i>
+            </div>
+            <div class="stat-info">
+              <h3>Avg Order Value</h3>
+              <p id="statAvgOrder">৳0</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-section-card" style="margin-top: 30px;">
+          <h3 class="card-title">Recent Orders</h3>
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Phone</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="recentOrdersTableBody">
+                <!-- Loaded dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Manage Orders Tab -->
+      <section id="tab-orders" class="tab-content">
+        <div class="admin-section-card">
+          <div class="card-header-flex">
+            <h3 class="card-title">Order Directory</h3>
+            <div class="search-bar-container" style="max-width: 300px; margin: 0;">
+              <input type="text" id="orderSearchInput" placeholder="Search orders by ID, Name or Phone..." class="search-input" style="border: 1px solid var(--border-color); background: white;">
+            </div>
+          </div>
+          
+          <div class="table-responsive" style="margin-top: 20px;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer Info</th>
+                  <th>Address</th>
+                  <th>Items Ordered</th>
+                  <th>Total Payment</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <!-- Loaded dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Manage Products Tab -->
+      <section id="tab-products" class="tab-content">
+        <div class="admin-section-card">
+          <div class="card-header-flex">
+            <h3 class="card-title">Product Catalog</h3>
+            <button onclick="openProductModal()" class="hero-btn" style="padding: 10px 20px; font-size: 14px;">
+              <i class="fa fa-plus"></i> Add New Product
+            </button>
+          </div>
+
+          <div style="display: flex; gap: 15px; margin: 20px 0;">
+            <input type="text" id="productSearchInput" placeholder="Search products by name..." class="search-input" style="border: 1px solid var(--border-color); background: white; max-width: 350px;">
+            <select id="productCategoryFilter" class="form-control" style="max-width: 200px;">
+              <option value="all">All Categories</option>
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Product Name</th>
+                  <th>Categories</th>
+                  <th>Weight</th>
+                  <th>Price</th>
+                  <th>Promo / Discount</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productsTableBody">
+                <!-- Loaded dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Product Modal Overlay (Add / Edit) -->
+  <div class="modal-overlay" id="productModalOverlay">
+    <div class="checkout-modal" style="max-width: 600px;">
+      <button class="modal-close-btn" onclick="closeProductModal()">&times;</button>
+      <h3 class="modal-title" id="productModalTitle">📦 Add New Product</h3>
+      <form id="productForm">
+        <input type="hidden" id="editProductId">
+        
+        <div class="form-group">
+          <label class="form-label" for="prodName">Product Name *</label>
+          <input type="text" id="prodName" class="form-control" placeholder="e.g. Fresh Rui Fish Curry Cut" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+          <div class="form-group">
+            <label class="form-label" for="prodWeight">Weight / Unit *</label>
+            <input type="text" id="prodWeight" class="form-control" placeholder="e.g. 1kg or 500g" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prodPrice">Price (৳) *</label>
+            <input type="number" id="prodPrice" class="form-control" min="0" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+          <div class="form-group">
+            <label class="form-label" for="prodOldPrice">Old Price (৳) (Optional)</label>
+            <input type="number" id="prodOldPrice" class="form-control" min="0">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prodDiscount">Discount Percentage (Optional)</label>
+            <input type="number" id="prodDiscount" class="form-control" min="0" max="100">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="prodImage">Image URL</label>
+          <input type="url" id="prodImage" class="form-control" placeholder="Paste image link">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Product Categories (Select all applicable)</label>
+          <div id="productCategoriesCheckboxContainer" class="checkbox-grid">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+          <input type="checkbox" id="prodIsSuperOffer" style="width: 20px; height: 20px; cursor: pointer;">
+          <label for="prodIsSuperOffer" style="font-weight: 500; cursor: pointer; user-select: none;">🔥 Feature in "Super Hot Offers" section</label>
+        </div>
+
+        <button type="submit" class="checkout-btn" style="border: none; width: 100%; margin-top: 15px;" id="productSubmitBtn">Save Product</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
