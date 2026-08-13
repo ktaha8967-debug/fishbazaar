@@ -177,11 +177,11 @@ app.delete('/api/admin/products/:productId', async (req, res) => {
 // Initialize DB and Start Server
 initDatabase().then(() => {
   app.listen(PORT, () => {
-    console.log(`Fish Bazar Backend running at http://localhost:${PORT}`);
+    console.log(`FreshCut Backend running at http://localhost:${PORT}`);
   });
 }).catch(err => {
   console.error("Database setup failed completely, starting server anyway...", err);
   app.listen(PORT, () => {
-    console.log(`Fish Bazar Backend running at http://localhost:${PORT}`);
+    console.log(`FreshCut Backend running at http://localhost:${PORT}`);
   });
 });

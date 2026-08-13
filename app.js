@@ -1,9 +1,9 @@
-// Fish Bazar Clone - PostgreSQL Sourced Application Logic
+// FreshCut Clone - PostgreSQL Sourced Application Logic
 let products = [];
 let categories = [];
 
 // App State Management
-let cart = JSON.parse(localStorage.getItem('fishbazar_cart')) || [];
+let cart = JSON.parse(localStorage.getItem('freshcut_cart')) || [];
 let activeCategory = 'all';
 let searchQuery = '';
 let priceFilter = 5000;
@@ -239,7 +239,7 @@ window.changeQuantity = function(productId, delta) {
 };
 
 function saveCart() {
-  localStorage.setItem('fishbazar_cart', JSON.stringify(cart));
+  localStorage.setItem('freshcut_cart', JSON.stringify(cart));
 }
 
 // Update Cart DOM
@@ -443,7 +443,7 @@ function setupEventListeners() {
       const customerAddress = document.getElementById("customerAddress").value;
       const activePayment = document.querySelector(".payment-card.active").innerText;
       
-      const loggedInUser = JSON.parse(localStorage.getItem('fishbazar_user'));
+      const loggedInUser = JSON.parse(localStorage.getItem('freshcut_user'));
       const orderPayload = {
         customerName,
         customerPhone,
@@ -476,7 +476,7 @@ function setupEventListeners() {
             <div style="text-align: center; padding: 30px 10px;">
               <span style="font-size: 60px; display: block; margin-bottom: 15px;">🎉</span>
               <h2 style="color: var(--primary-dark); font-weight: bold; margin-bottom: 10px;">Order Placed!</h2>
-              <p style="margin-bottom: 20px;">Thank you for shopping at Fish Bazar. Your order has been securely saved in PostgreSQL.</p>
+              <p style="margin-bottom: 20px;">Thank you for shopping at FreshCut. Your order has been securely saved in PostgreSQL.</p>
               
               <div style="background-color: var(--bg-main); padding: 15px; border-radius: var(--radius-sm); text-align: left; margin-bottom: 25px;">
                 <p><strong>Order Database ID:</strong> ${responseData.orderId}</p>

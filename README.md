@@ -1,6 +1,6 @@
-# Fish Bazar Clone (PostgreSQL Backend)
+# FreshCut Clone (PostgreSQL Backend)
 
-This is a premium, fully working, functional clone of **Fish Bazar** (https://www.fishbazar.com.bd/) with a Node.js Express backend and a PostgreSQL database.
+This is a premium, fully working, functional clone of **FreshCut** (https://www.freshcut.com.bd/) with a Node.js Express backend and a PostgreSQL database.
 
 ## Features
 - **100% Sourced Real Catalog:** Sourced 301 products and categories straight from the active live database CDN.
